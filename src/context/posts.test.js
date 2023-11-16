@@ -29,7 +29,7 @@ test('fetch Categories', async () => {
     })
 })
 
-/* featured posts
+// featured posts
 const TestFeaturedPostsComponent = () => {
     const { featuredPosts, fetchFeaturedPosts } = useContext(PostsContext);
     fetchFeaturedPosts();
@@ -51,8 +51,8 @@ test('fetch featuredPosts', async () => {
         expect(screen.getByRole('exists')).toBeInTheDocument();
     })
 })
-*/
-/* posts
+
+// posts
 const TestPostsComponent = () => {
     const { posts, fetchPosts } = useContext(PostsContext);
     fetchPosts(1);
@@ -74,7 +74,7 @@ test('fetch Posts', async () => {
         expect(screen.getByRole('exists')).toBeInTheDocument();
     })
 })
-*/
+
 /* delete
 const TestDeleteComponent = () => {
     const { posts, fetchPosts, deletePostById } = useContext(PostsContext);

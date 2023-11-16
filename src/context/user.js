@@ -9,14 +9,14 @@ function Provider({ children }) {
 
 // FETCHING----------------------------------------------------------------
     const fetchUser = useCallback(async (userId, password) => {
-        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?userid=${userId}&password=${password}%7d`);
-        if(response.length !== 1) {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?userid=${userId}&password=${password}`);
+        if(response.data.length !== 1) {
             setUser(null);
         }
         else {
-            setUser(response.data);
+            setUser(response.data[0]);
         }
-    }, []);
+    }, [process.env.REACT_APP_SERVER_URL]);
     
 // MODIFYING---------------------------------------------------------------
     const editUserById = async (id, newValues) => {

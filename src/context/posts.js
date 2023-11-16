@@ -13,19 +13,19 @@ function Provider({ children }) {
     const fetchFeaturedPosts = useCallback(async () => {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?_expand=user&_sort=datetime&_order=desc&_start=0&_end=12`);
         setFeaturedPosts(response.data);
-    }, []);
+    }, [process.env.REACT_APP_SERVER_URL]);
 
     const fetchCategories = useCallback(async () => {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/categories?_sort=name&_order=asc`);
         setCategories(response.data);
-    }, []);
+    }, [process.env.REACT_APP_SERVER_URL]);
 
     const fetchPosts = useCallback(async (userId) => {
-        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?userId=$%7b${userId}%7d&_expand=user&_sort=datetime&_order=desc`);
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?userId=${userId}&_expand=user&_sort=datetime&_order=desc`);
         setPosts(response.data);
-    }, []);
+    }, [process.env.REACT_APP_SERVER_URL]);
 
-    // MODIFYING---------------------------------------------------------------
+// MODIFYING---------------------------------------------------------------
     const deletePostById = async (id) => {
         await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts?_expand=user&_sort=datetime&_order=desc&_start=0&_end=12`);
         const updatedPosts = posts.filter((post) => {
@@ -46,7 +46,7 @@ function Provider({ children }) {
     };
 
     const createPost = async (values, userId) => {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts?userId=$%7b${userId}%7d&_expand=user&_sort=datetime&_order=desc`, values);
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts?userId=${userId}&_expand=user&_sort=datetime&_order=desc`, values);
         const updatedPosts = [...posts, response.data];
         setPosts(updatedPosts);
     };
